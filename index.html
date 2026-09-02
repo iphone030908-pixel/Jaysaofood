@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAY SAO - Luxury White & Gold Kitchen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Kanit:wght@200;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-light: #fcfbf7;
+            --card-light: #ffffff;
+            --gold-primary: #c5a059;
+            --gold-dark: #9a763c;
+            --gold-gradient: linear-gradient(135deg, #f7eed0 0%, #c5a059 50%, #9a763c 100%);
+            --text-main: #2b2b2b;
+            --text-muted: #7a7a7a;
+            --border-color: rgba(197, 160, 89, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            padding-bottom: 90px;
+        }
+
+        header {
+            background: linear-gradient(180deg, #ffffff 0%, #fcfbf7 100%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 25px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(197, 160, 89, 0.08);
+        }
+
+        header h1 {
+            font-family: 'Cinzel', serif;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.2rem;
+            letter-spacing: 4px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .table-badge {
+            display: inline-block;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-dark);
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-top: 12px;
+            letter-spacing: 1px;
+            background: rgba(197, 160, 89, 0.05);
+            font-weight: 600;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .table-selector-card {
+            background: var(--card-light);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.08);
+        }
+
+        .table-selector-card label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gold-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .table-select-dropdown {
+            background: #ffffff;
+            color: var(--text-main);
+            border: 1px solid var(--gold-primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            outline: none;
+            font-family: 'Kanit', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-dark);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 6px;
+        }
+
+        .category-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .category-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-btn {
+            background-color: var(--card-light);
+            color: var(--text-muted);
+            border: 1px solid rgba(0,0,0,0.06);
+            padding: 8px 18px;
+            border-radius: 25px;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .category-btn.active {
+            background: var(--gold-gradient);
+            color: #fff;
+            border-color: transparent;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.25);
+        }
+
+        .menu-category-section {
+            display: none;
+        }
+
+        .menu-category-section.active {
+            display: block;
+        }
+
+        .menu-item {
+            background-color: var(--card-light);
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .menu-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            background-color: #f5f5f5;
+        }
+
+        .menu-info {
+            flex-grow: 1;
+        }
+
+        .menu-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .menu-price {
+            color: var(--gold-dark);
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-top: 4px;
+        }
+
+        .btn-add {
+            background: transparent;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-dark);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .btn-add:after {
+            content: '+';
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .btn-add:hover {
+            background: var(--gold-gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .order-type-container {
+            display: flex;
+            background: #f4f4f0;
+            padding: 4px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(197, 160, 89, 0.15);
+        }
+
+        .order-type-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .order-type-btn.active {
+            background: #ffffff;
+            color: var(--gold-dark);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .status-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            padding: 0 10px;
+            position: relative;
+        }
+
+        .status-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px; left: 10%; right: 10%;
+            height: 2px;
+            background: #e5e5e0;
+            z-index: 1;
+        }
+
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        .step-dot {
+            width: 32px;
+            height: 32px;
+            background: #ffffff;
+            border: 2px solid #e5e5e0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .step-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .step-item.active .step-dot {
+            background: var(--gold-gradient);
+            border-color: transparent;
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(197, 160, 89, 0.3);
+        }
+
+        .step-item.active .step-text {
+            color: var(--gold-dark);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--card-light);
+            width: 100%;
+            max-width: 600px;
+            border-top: 3px solid var(--gold-primary);
+            border-radius: 24px 24px 0 0;
+            padding: 24px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 10px;
+        }
+
+        .modal-header h3 {
+            color: var(--gold-dark);
+            font-size: 1.15rem;
+        }
+
+        .btn-close-modal {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        .option-group {
+            margin-bottom: 15px;
+        }
+
+        .option-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .option-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f6;
+            padding: 10px 14px;
+            border-radius: 10px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.03);
+            font-size: 0.85rem;
+        }
+
+        .option-label input {
+            accent-color: var(--gold-primary);
+        }
+
+        .option-label:has(input:checked) {
+            border-color: var(--gold-primary);
+            background: rgba(197, 160, 89, 0.05);
+        }
+
+        .input-note {
+            width: 100%;
+            background-color: #f9f9f6;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 10px;
+            padding: 10px;
+            color: var(--text-main);
+            resize: none;
+        }
+
+        .cart-item {
+            background-color: var(--card-light);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+        }
+
+        .cart-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-qty {
+            background: #f4f4f0;
+            color: var(--text-main);
+            border: 1px solid rgba(0,0,0,0.1);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-delete {
+            background: none;
+            border: none;
+            color: #c94c4c;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-left: 5px;
+        }
+
+        .cart-summary {
+            margin-top: 25px;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 15px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            background: var(--gold-gradient);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.2);
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 40px 20px;
+        }
+
+        .empty-state i {
+            font-size: 2.2rem;
+            color: var(--gold-primary);
+            opacity: 0.4;
+            margin-bottom: 10px;
+        }
+
+        .qr-wrapper {
+            text-align: center;
+            padding: 10px 0;
+        }
+        
+        .qr-img {
+            width: 200px;
+            border-radius: 12px;
+            border: 2px solid var(--gold-primary);
+            margin: 10px 0;
+        }
+
+        .payment-method-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .pay-method-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            background: #f9f9f6;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .pay-method-btn.active {
+            background: rgba(197, 160, 89, 0.1);
+            border-color: var(--gold-primary);
+            color: var(--gold-dark);
+        }
+
+        .order-no-tag {
+            background: var(--gold-gradient);
+            color: #000;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: #ffffff;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 100;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+        }
+
+        .nav-item {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.7rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-item i {
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+        }
+
+        .nav-item.active {
+            color: var(--gold-dark);
+            font-weight: 600;
+        }
+
+        .badge {
+            position: absolute;
+            top: -4px; right: 4px;
+            background-color: var(--gold-dark);
+            color: #fff;
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>JAY SAO</h1>
+        <p>Luxury Street Food & Gastronomy</p>
+        <div class="table-badge" id="header-table-badge"><i class="fa-solid fa-chair"></i> LA CORNE • TOK 01</div>
+    </header>
+
+    <div class="container">
+        
+        <section id="menu-page" class="page active">
+            <div class="table-selector-card">
+                <label for="customer-table-select"><i class="fa-solid fa-chair"></i> เลือกหมายเลขโต๊ะของคุณ:</label>
+                <select id="customer-table-select" class="table-select-dropdown" onchange="handleTableSelectChange(this.value)">
+                    <option value="01">โต๊ะ 01</option>
+                    <option value="02">โต๊ะ 02</option>
+                    <option value="03">โต๊ะ 03</option>
+                    <option value="04">โต๊ะ 04</option>
+                    <option value="05">โต๊ะ 05</option>
+                    <option value="06">โต๊ะ 06</option>
+                </select>
+            </div>
+
+            <div class="category-container">
+                <button class="category-btn active" onclick="switchCategory('rice', this)">อาหารจานเดียว / ทอด</button>
+                <button class="category-btn" onclick="switchCategory('noodle', this)">เส้น / ต้ม / ยำ</button>
+                <button class="category-btn" onclick="switchCategory('drink', this)">เครื่องดื่ม</button>
+            </div>
+
+            <div id="menu-sections-wrapper">
+                <div id="cat-rice" class="menu-category-section active">
+                    <h2>Plats Uniques (อาหารจานเดียว / ทอด)</h2>
+                    <div class="menu-item">
+                        <img src="https://img.wongnai.com/p/1920x0/2022/01/13/f2626c57995541728edc4d3eea606102.jpg" class="menu-img">
+                        <div class="menu-info"><h3>ทอดกระเทียม</h3><div class="menu-price">฿40</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ทอดกระเทียม', 50, 'meats_base_1')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://img.wongnai.com/p/1968x0/2021/05/01/8c9d0b0ed1144b0a9b326511bb588127.jpg" class="menu-img">
+                        <div class="menu-info"><h3>ข้าวผัดพริกแกง</h3><div class="menu-price">฿50</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ข้าวผัดพริกแกง', 50, 'meats_base_1')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://img.wongnai.com/p/1968x0/2021/01/12/a5844291a9b8449cae9d97bcf03c6aab.jpg" class="menu-img">
+                        <div class="menu-info"><h3>ข้าวผัดพริกเผา</h3><div class="menu-price">฿40</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ข้าวผัดพริกเผา', 50, 'meats_base_1')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://th.bing.com/th/id/OIP.IJAVjb0axqtXsgxCUmme5gHaEK?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" class="menu-img">
+                        <div class="menu-info"><h3>ข้าวผัดหมู50฿ทะเล60฿</h3><div class="menu-price">หมู฿50 ทะเล60฿</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ข้าวผัด',50,60 , 'meats_base_1')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.TvmHz9AyeAPrZUSGvqXUiAHaFf?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" class="menu-img">
+                        <div class="menu-info"><h3>ไข่เจียว</h3><div class="menu-price">฿40</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ไข่เจียว', 40, 'meats_egg')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://i.ytimg.com/vi/MJmhXn2FpyA/maxresdefault.jpg" class="menu-img">
+                        <div class="menu-info"><h3>ผัดกะเพราหมู50฿ ไก่40฿</h3><div class="menu-price">หมู฿50 ไก่40฿</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ผัดกะเพรา',50,40, 'meats_kaprow')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://img.wongnai.com/p/1920x0/2020/06/21/34a3de5c4de24c84a3d3649ab2f8cc55.jpg" class="menu-img">
+                        <div class="menu-info"><h3>ผัดกะเพราทะเล</h3><div class="menu-price">฿60</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ผัดกะเพราทะเล', 60, 'meats_kaprow_sea')"></button>
+                    </div>
+                    <!-- เพิ่ม กะเพราไข่เยี่ยวม้า (ไม่ต้องแยกประเภท) -->
+                    <div class="menu-item">
+                        <img src="https://th.bing.com/th/id/OSK.ae7bac9dd9e0743500c942cfaf7e0091?w=424&h=424&c=7&rs=1&qlt=90&o=6&pid=16.1" class="menu-img">
+                        <div class="menu-info"><h3>กะเพราไข่เยี่ยวม้า</h3><div class="menu-price">฿60</div></div>
+                        <button class="btn-add" onclick="openOptionModal('กะเพราไข่เยี่ยวม้า', 60, 'no_meat')"></button>
+                    </div>
+                    </div>
+                    <!-- เพิ่ม ผัดผักรวมมิตร -->
+                    <div class="menu-item">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.VYHNnKZmeN2gaBbTB5o74gHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" class="menu-img">
+                        <div class="menu-info"><h3>ผัดผักรวม</h3><div class="menu-price">฿60</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ผัดผักรวม', 60, 'no_meat')"></button>
+                    </div>
+                    <!-- เพิ่ม คะน้าหมูกรอบ -->
+                    <div class="menu-item">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.TDiMyCKiDo4_aYntzMCIawHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" class="menu-img">
+                        <div class="menu-info"><h3>คะน้าหมูกรอบ</h3><div class="menu-price">฿60</div></div>
+                        <button class="btn-add" onclick="openOptionModal('คะน้าหมูกรอบ', 60, 'no_meat')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.N3YHGCW5iSB_kTZWjLpuhgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" class="menu-img">
+                        <div class="menu-info"><h3>คั่วกลิ้ง</h3><div class="menu-price">฿60</div></div>
+                        <button class="btn-add" onclick="openOptionModal('คั่วกลิ้ง', 60, 'khua_kling')"></button>
+                    </div>
+                </div>
+
+                <div id="cat-noodle" class="menu-category-section">
+                    <h2>Nouilles et Soupes (เส้น / ต้ม / ยำ)</h2>
+                    <!-- เพิ่ม สุกี้ทะเล -->
+                    <div class="menu-item">
+                        <img src="https://f.ptcdn.info/860/090/000/tcgr4t10za0RW9Y0MKpym-o.jpg" class="menu-img">
+                        <div class="menu-info"><h3>สุกี้ทะเล</h3><div class="menu-price">฿60</div></div>
+                        <button class="btn-add" onclick="openOptionModal('สุกี้ทะเล', 60, 'suki_seafood')"></button>
+                    </div>
+                    <!-- เพิ่ม สุกี้ (เลือกน้ำ/แห้ง + เลือก หมู/ไก่) -->
+                    <div class="menu-item">
+                        <img src="https://f.ptcdn.info/754/080/000/rvikb01exo60hoOwMv2fX-o.jpg" class="menu-img">
+                        <div class="menu-info"><h3>สุกี้</h3><div class="menu-price">฿60</div></div>
+                        <button class="btn-add" onclick="openOptionModal('สุกี้', 60, 'suki_normal')"></button>
+                    </div>
+                    <!-- เพิ่ม ยำรวมมิตร -->
+                    <div class="menu-item">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.dFy8n-pOTzNy0Rqg1gU2ggHaHb?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" class="menu-img">
+                        <div class="menu-info"><h3>ยำรวมมิตร</h3><div class="menu-price">฿70</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ยำรวมมิตร', 70, 'no_meat')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.i8Zs0XVp0LWXS-XCx2I8hgHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" class="menu-img">
+                        <div class="menu-info"><h3>ราดหน้าหมู50฿ทะเล60฿</h3><div class="menu-price">หมู฿50 ทะเล60฿</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ราดหน้า', 50,60, 'meats_base_1')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://tse2.mm.bing.net/th/id/OIP.foR1HHjRJpYGmgcp0Z8yRAHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" class="menu-img">
+                        <div class="menu-info"><h3>ผัดซีอิ๊ว</h3><div class="menu-price">฿50</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ผัดซีอิ๊ว', 50, 'meats_base_1')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.k1XKmcbDNRUupFWrlyPatgHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" class="menu-img">
+                        <div class="menu-info"><h3>ต้มจืด</h3><div class="menu-price">฿70</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ต้มจืด', 70, 'meats_soup_jued')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.ai2lg3OWC7u1I9Z4sAWirwHaDt?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" class="menu-img">
+                        <div class="menu-info"><h3>ต้มยำน้ำข้น</h3><div class="menu-price">฿70</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ต้มยำน้ำข้น', 70, 'meats_tomyam')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://aowtakiabseafood.com/delivery/wp-content/uploads/2019/06/IMG_0770.jpg" class="menu-img">
+                        <div class="menu-info"><h3>ต้มยำน้ำใส</h3><div class="menu-price">฿70</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ต้มยำน้ำใส', 70, 'meats_tomyam')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://media.lul.la/wp-content/uploads/2021/02/15213921/EAS06872-1-1024x1024.jpg" class="menu-img">
+                        <div class="menu-info"><h3>ผัดมาม่าขี้เมาทะเล</h3><div class="menu-price">฿60</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ผัดมาม่า', 60, 'meats_base_1')"></button>
+                    </div>
+                </div>
+
+                <div id="cat-drink" class="menu-category-section">
+                    <h2>Les Boissons (เครื่องดื่ม)</h2>
+                    <div class="menu-item">
+                        <img src="https://filebroker-cdn.lazada.co.th/kf/S2b8f00ce81c3419085d7d1ec997337f73.jpg" class="menu-img">
+                        <div class="menu-info"><h3>น้ำเปล่า</h3><div class="menu-price">฿10</div></div>
+                        <button class="btn-add" onclick="openOptionModal('น้ำเปล่า', 10, 'drink')"></button>
+                    </div>
+                   
+                    <div class="menu-item">
+                        <img src="https://cpimg.tistatic.com/06620343/b/4/Lipton-Ice-Tea-Lemon.jpg" class="menu-img">
+                        <div class="menu-info"><h3>ลิปตัน</h3><div class="menu-price">฿15</div></div>
+                        <button class="btn-add" onclick="openOptionModal('ลิปตัน', 15, 'drink')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.HUV9QFexnpjLpmhCzsMPLAAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" class="menu-img">
+                        <div class="menu-info"><h3>เป๊ปซี่</h3><div class="menu-price">฿13</div></div>
+                        <button class="btn-add" onclick="openOptionModal('เป๊ปซี่', 13, 'drink')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://www.mnrhcoopshop.com/uploadpicpdc/202604237351800.jpg" class="menu-img">
+                        <div class="menu-info"><h3>น้ำแดง เอส</h3><div class="menu-price">฿10      </div></div>
+                        <button class="btn-add" onclick="openOptionModal('น้ำแดง เอส', 10, 'drink')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://www.mnrhcoopshop.com/uploadpicpdc/202407243495785.jpg" class="menu-img">
+                        <div class="menu-info"><h3>น้ำส้ม เอส</h3><div class="menu-price">฿10</div></div>
+                        <button class="btn-add" onclick="openOptionModal('น้ำส้ม เอส', 10, 'drink')"></button>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://www.mnrhcoopshop.com/uploadpicpdc/202406306664583.jpg" class="menu-img">
+                        <div class="menu-info"><h3>น้ำเขียว เอส</h3><div class="menu-price">฿10</div></div>
+                        <button class="btn-add" onclick="openOptionModal('น้ำเขียว เอส', 10, 'drink')"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cart-page" class="page">
+            <h2>Votre Panier (ตะกร้าของคุณ)</h2>
+            
+            <div class="order-type-container">
+                <button id="type-dinein" class="order-type-btn active" onclick="setOrderType('ทานที่ร้าน')"><i class="fa-solid fa-utensils"></i> ทานที่ร้าน</button>
+                <button id="type-takeaway" class="order-type-btn" onclick="setOrderType('กลับบ้าน')"><i class="fa-solid fa-bag-shopping"></i> กลับบ้าน (Takeaway)</button>
+            </div>
+
+            <div id="cart-list"></div>
+            <div class="cart-summary" id="cart-summary" style="display: none;">
+                <div class="summary-row">
+                    <span>ยอดรวมสุทธิ:</span>
+                    <span id="total-price" style="color: var(--gold-dark); font-weight: 600;">฿0</span>
+                </div>
+                <button class="btn-checkout" onclick="openPaymentModal()">สั่งซื้อและชำระเงิน</button>
+            </div>
+        </section>
+
+        <section id="order-page" class="page">
+            <h2>Suivi de Commande (สถานะออเดอร์)</h2>
+            <div id="order-list">
+                <div class="empty-state"><i class="fa-solid fa-receipt"></i><p>ยังไม่มีประวัติการสั่งอาหาร</p></div>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal-overlay" id="optionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalMenuName">ชื่อเมนู</h3>
+                <button class="btn-close-modal" onclick="closeOptionModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalOptionsBody"></div>
+            <div style="margin-top: 20px;"><button class="btn-checkout" id="btnConfirmAdd">เพิ่มลงตะกร้าสินค้า</button></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-content" style="border-top-color: var(--gold-primary);">
+            <div class="modal-header">
+                <h3>ชำระเงิน</h3>
+                <button class="btn-close-modal" onclick="closePaymentModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 10px;">
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">ยอดรวมที่ต้องชำระ</p>
+                    <h2 id="pay-total-amount" style="color: var(--gold-dark); font-size: 1.8rem; border: none; margin: 0; padding: 0;">฿0</h2>
+                </div>
+
+                <div class="payment-method-selector">
+                    <button class="pay-method-btn active" id="btn-pay-qr" onclick="selectPaymentMethod('qr')">
+                        <i class="fa-solid fa-qrcode"></i> โอนเงินผ่าน QR
+                    </button>
+                    <button class="pay-method-btn" id="btn-pay-cash" onclick="selectPaymentMethod('cash')">
+                        <i class="fa-solid fa-money-bill-wave"></i> เงินสดหน้าร้าน
+                    </button>
+                </div>
+
+                <div class="qr-wrapper" id="qr-payment-section">
+                    <img src="https://i.ibb.co/TB2PfPLk/IMG-0858.png" class="qr-img" alt="PromptPay QR Code">
+                    <div><span class="payment-status-badge" style="background:rgba(197, 160, 89, 0.08); font-size: 0.8rem; color: var(--gold-dark);"><i class="fa-solid fa-circle-notch fa-spin"></i> สแกนจ่ายและกดปุ่มยืนยัน</span></div>
+                </div>
+
+                <div id="cash-payment-section" style="display: none; text-align: center; padding: 20px 10px; background: #f9f9f6; border-radius: 12px; border: 1px dashed var(--gold-primary);">
+                    <i class="fa-solid fa-hand-holding-dollar" style="font-size: 2.5rem; color: var(--gold-primary); margin-bottom: 10px;"></i>
+                    <p style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">ชำระเงินสดกับแม่ค้า</p>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">กรุณาชำระเงินสดที่เคาน์เตอร์หรือเมื่อพนักงานนำอาหารไปเสิร์ฟค่ะ</p>
+                </div>
+            </div>
+            <div style="margin-top: 15px; padding-bottom: 10px;">
+                <button class="btn-checkout" onclick="confirmPayment()">✅ ยืนยันการส่งออเดอร์</button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchPage('menu-page', this)"><i class="fa-solid fa-utensils"></i><span>MENU</span></button>
+        <button class="nav-item" onclick="switchPage('cart-page', this)"><i class="fa-solid fa-basket-shopping"></i><span>CART</span><span class="badge" id="cart-badge" style="display: none;">0</span></button>
+        <button class="nav-item" onclick="switchPage('order-page', this)"><i class="fa-solid fa-receipt"></i><span>ORDER</span></button>
+    </nav>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBzWaK2WseL5u6DP2e3hV94rM51xwrnBkQ",
+            authDomain: "jeesaorder.firebaseapp.com",
+            databaseURL: "https://jeesaorder-default-rtdb.firebaseio.com",
+            projectId: "jeesaorder",
+            storageBucket: "jeesaorder.firebasestorage.app",
+            messagingSenderId: "5197062084",
+            appId: "1:5197062084:web:9bb8fef5d3db0fe58cec31",
+            measurementId: "G-FJ7Y9673YR"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        window.sendOrderToFirebase = function(orderData) {
+            const ordersRef = ref(database, 'orders');
+            const newOrderRef = push(ordersRef);
+
+            set(newOrderRef, orderData)
+                .then(() => {
+                    console.log("ออเดอร์เด้งเข้าหลังบ้านเรียบร้อยแล้ว! Key:", newOrderRef.key);
+                    listenToOrderStatus(newOrderRef.key);
+                })
+                .catch(err => console.error(err));
+        };
+
+        function listenToOrderStatus(orderKey) {
+            const singleOrderRef = ref(database, `orders/${orderKey}`);
+            onValue(singleOrderRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    const order = snapshot.val();
+                    updateOrderStatusUI(order);
+                }
+            });
+        }
+
+        function updateOrderStatusUI(order) {
+            const statusBadge = document.getElementById('cust-order-status-text');
+            const step1 = document.getElementById('step-1');
+            const step2 = document.getElementById('step-2');
+            const step3 = document.getElementById('step-3');
+
+            if (!statusBadge) return;
+
+            statusBadge.textContent = order.status;
+
+            step1.classList.remove('active');
+            step2.classList.remove('active');
+            step3.classList.remove('active');
+
+            if (order.status === 'รอตรวจสอบ' || order.status === 'รอตรวจสอบการชำระเงิน') {
+                step1.classList.add('active');
+                statusBadge.style.color = 'var(--gold-dark)';
+            } else if (order.status === 'กำลังปรุงอาหาร') {
+                step1.classList.add('active');
+                step2.classList.add('active');
+                statusBadge.style.color = '#ffbe0b';
+            } else if (order.status === 'เสิร์ฟเรียบร้อย') {
+                step1.classList.add('active');
+                step2.classList.add('active');
+                step3.classList.add('active');
+                statusBadge.style.color = '#00b4d8';
+            }
+        }
+    </script>
+
+    <script>
+        let cart = [];
+        let currentItem = null;
+        let finalOrderTotal = 0;
+        let selectedOrderType = 'ทานที่ร้าน';
+        let selectedPaymentMethod = 'qr';
+        let selectedTableNo = '01';
+
+        function handleTableSelectChange(tableValue) {
+            selectedTableNo = tableValue;
+            const badge = document.getElementById('header-table-badge');
+            if (badge) {
+                badge.innerHTML = `<i class="fa-solid fa-chair"></i> LA CORNE • TOK ${tableValue}`;
+            }
+        }
+
+        function setOrderType(type) {
+            selectedOrderType = type;
+            document.getElementById('type-dinein').classList.remove('active');
+            document.getElementById('type-takeaway').classList.remove('active');
+            
+            if(type === 'ทานที่ร้าน') {
+                document.getElementById('type-dinein').classList.add('active');
+            } else {
+                document.getElementById('type-takeaway').classList.add('active');
+            }
+        }
+
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            document.getElementById('btn-pay-qr').classList.remove('active');
+            document.getElementById('btn-pay-cash').classList.remove('active');
+
+            if (method === 'qr') {
+                document.getElementById('btn-pay-qr').classList.add('active');
+                document.getElementById('qr-payment-section').style.display = 'block';
+                document.getElementById('cash-payment-section').style.display = 'none';
+            } else {
+                document.getElementById('btn-pay-cash').classList.add('active');
+                document.getElementById('qr-payment-section').style.display = 'none';
+                document.getElementById('cash-payment-section').style.display = 'block';
+            }
+        }
+
+        function switchCategory(categoryId, element) {
+            document.querySelectorAll('.menu-category-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('cat-' + categoryId).classList.add('active');
+            element.classList.add('active');
+        }
+
+        function switchPage(pageId, element) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            element.classList.add('active');
+            if(pageId === 'cart-page') renderCart();
+        }
+
+        function openOptionModal(name, price, type) {
+            currentItem = { name, price, type };
+            document.getElementById('modalMenuName').textContent = name;
+            const body = document.getElementById('modalOptionsBody');
+            body.innerHTML = '';
+
+            if (type === 'meats_base_1') {
+                body.innerHTML += `
+                    <div class="option-group">
+                        <div class="option-title">เลือกเนื้อสัตว์</div>
+                        <label class="option-label"><span>หมู</span><input type="radio" name="f_meat" value="หมู" checked></label>
+                        <label class="option-label"><span>ไก่</span><input type="radio" name="f_meat" value="ไก่"></label>
+                        <label class="option-label"><span>กุ้ง</span><input type="radio" name="f_meat" value="กุ้ง"></label>
+                        <label class="option-label"><span>หมึก</span><input type="radio" name="f_meat" value="หมึก"></label>
+                    </div>`;
+            } else if (type === 'khua_kling') {
+                body.innerHTML += `
+                    <div class="option-group">
+                        <div class="option-title">เลือกเนื้อสัตว์</div>
+                        <label class="option-label"><span>หมู</span><input type="radio" name="f_meat" value="หมู" checked></label>
+                        <label class="option-label"><span>ไก่</span><input type="radio" name="f_meat" value="ไก่"></label>
+                        <label class="option-label"><span>กุ้ง</span><input type="radio" name="f_meat" value="กุ้ง"></label>
+                        <label class="option-label"><span>หมึก</span><input type="radio" name="f_meat" value="หมึก"></label>
+                    </div>`;
+            } else if (type === 'suki_seafood') {
+                body.innerHTML += `
+                    <div class="option-group">
+                        <div class="option-title">เลือกประเภทสุกี้</div>
+                        <label class="option-label"><span>สุกี้น้ำ</span><input type="radio" name="f_suki_type" value="สุกี้น้ำ" checked></label>
+                        <label class="option-label"><span>สุกี้แห้ง</span><input type="radio" name="f_suki_type" value="สุกี้แห้ง"></label>
+                    </div>`;
+            } else if (type === 'suki_normal') {
+                body.innerHTML += `
+                    <div class="option-group">
+                        <div class="option-title">เลือกประเภทสุกี้</div>
+                        <label class="option-label"><span>สุกี้น้ำ</span><input type="radio" name="f_suki_type" value="สุกี้น้ำ" checked></label>
+                        <label class="option-label"><span>สุกี้แห้ง</span><input type="radio" name="f_suki_type" value="สุกี้แห้ง"></label>
+                    </div>
+                    <div class="option-group">
+                        <div class="option-title">เลือกเนื้อสัตว์</div>
+                        <label class="option-label"><span>หมู</span><input type="radio" name="f_meat" value="หมู" checked></label>
+                        <label class="option-label"><span>ไก่</span><input type="radio" name="f_meat" value="ไก่"></label>
+                    </div>`;
+            } else if (type === 'meats_egg') {
+                body.innerHTML += `
+                    <div class="option-group">
+                        <div class="option-title">เลือกประเภทไข่เจียว</div>
+                        <label class="option-label"><span>หมูสับ</span><input type="radio" name="f_meat" value="หมูสับ" checked></label>
+                        <label class="option-label"><span>แหนม</span><input type="radio" name="f_meat" value="แหนม"></label>
+                    </div>`;
+            } else if (type === 'meats_soup_jued') {
+                body.innerHTML += `
+                    <div class="option-group">
+                        <div class="option-title">เลือกประเภทแกงจืด</div>
+                        <label class="option-label"><span>เต้าหู้อ่อนหมูสับ</span><input type="radio" name="f_meat" value="เต้าหู้อ่อนหมูสับ" checked></label>
+                        <label class="option-label"><span>ไข่น้ำหมูสับ</span><input type="radio" name="f_meat" value="ไข่น้ำหมูสับ"></label>
+                    </div>`;
+            } else if (type === 'meats_tomyam') {
+                body.innerHTML += `
+                    <div class="option-group">
+                        <div class="option-title">เลือกประเภทต้มยำ</div>
+                        <label class="option-label"><span>ไก่</span><input type="radio" name="f_meat" value="ไก่" checked></label>
+                        <label class="option-label"><span>กุ้ง</span><input type="radio" name="f_meat" value="กุ้ง"></label>
+                        <label class="option-label"><span>ปลา</span><input type="radio" name="f_meat" value="ปลา"></label>
+                        <label class="option-label"><span>รวมมิตร</span><input type="radio" name="f_meat" value="รวมมิตร"></label>
+                    </div>`;
+            } else if (type === 'meats_kaprow') {
+                body.innerHTML += `
+                    <div class="option-group">
+                        <div class="option-title">เลือกเนื้อสัตว์ / ตัวเลือกกะเพรา</div>
+                        <label class="option-label"><span>หมูชิ้น</span><input type="radio" name="f_meat" value="หมูชิ้น" checked></label>
+                        <label class="option-label"><span>หมูสับ</span><input type="radio" name="f_meat" value="หมูสับ"></label>
+                        <label class="option-label"><span>หมูยอ</span><input type="radio" name="f_meat" value="หมูยอ"></label>
+                        <label class="option-label"><span>ไก่</span><input type="radio" name="f_meat" value="ไก่"></label>
+                        <label class="option-label"><span>เครื่องใน</span><input type="radio" name="f_meat" value="เครื่องใน"></label>
+                        <label class="option-label"><span>ปลากระป๋อง</span><input type="radio" name="f_meat" value="ปลากระป๋อง"></label>
+                        <label class="option-label"><span>ไข่เยี่ยวม้า</span><input type="radio" name="f_meat" value="ไข่เยี่ยวม้า"></label>
+                        <label class="option-label"><span>เต้าหู้ปลา</span><input type="radio" name="f_meat" value="เต้าหู้ปลา"></label>
+                    </div>`;
+            } else if (type === 'meats_kaprow_sea') {
+                body.innerHTML += `
+                    <div class="option-group">
+                        <div class="option-title">เลือกเนื้อสัตว์ทะเล</div>
+                        <label class="option-label"><span>กุ้ง</span><input type="radio" name="f_meat" value="กุ้ง" checked></label>
+                        <label class="option-label"><span>ปลาหมึก</span><input type="radio" name="f_meat" value="ปลาหมึก"></label>
+                        <label class="option-label"><span>ปลา</span><input type="radio" name="f_meat" value="ปลา"></label>
+                    </div>`;
+            }
+
+            if (type !== 'drink') {
+                body.innerHTML += `
+                    <div class="option-group">
+                        <div class="option-title">เลือกขนาด / รูปแบบ</div>
+                        <label class="option-label"><span>ธรรมดา</span><input type="radio" name="f_size" value="ปกติ" checked data-p="0"></label>
+                        <label class="option-label"><span>พิเศษ (+฿10)</span><input type="radio" name="f_size" value="พิเศษ" data-p="10"></label>
+                    </div>`;
+
+                // ซ่อนส่วน "เพิ่มไข่ดาว / ไข่เจียว" เมื่อเป็น สุกี้ทะเล, สุกี้ทั่วไป และ คั่วกลิ้ง
+                if (type !== 'suki_seafood' && type !== 'suki_normal' && type !== 'khua_kling') {
+                    body.innerHTML += `
+                        <div class="option-group">
+                            <div class="option-title">เพิ่มไข่ดาว / ไข่เจียว</div>
+                            <label class="option-label"><span>เพิ่มไข่ดาว (+฿10)</span><input type="checkbox" name="f_egg" value="ไข่ดาว" data-p="10"></label>
+                            <label class="option-label"><span>เพิ่มไข่เจียว (+฿15)</span><input type="checkbox" name="f_egg" value="ไข่เจียว" data-p="15"></label>
+                        </div>`;
+                }
+
+                body.innerHTML += `
+                    <div class="option-group">
+                        <div class="option-title">ระดับความเผ็ด (ถ้ามี)</div>
+                        <label class="option-label"><span>ไม่เผ็ด</span><input type="radio" name="f_spicy" value="ไม่เผ็ด"></label>
+                        <label class="option-label"><span>เผ็ดปกติ</span><input type="radio" name="f_spicy" value="เผ็ดปกติ" checked></label>
+                        <label class="option-label"><span>เผ็ดมาก</span><input type="radio" name="f_spicy" value="เผ็ดมาก"></label>
+                    </div>`;
+            } else {
+                body.innerHTML += `
+                    <div class="option-group">
+                        <div class="option-title">ตัวเลือกเครื่องดื่ม</div>
+                        <label class="option-label"><span>ใส่น้ำแข็ง</span><input type="checkbox" id="d_ice" value="ใส่น้ำแข็ง" checked></label>
+                    </div>`;
+            }
+
+            body.innerHTML += `
+                <div class="option-group">
+                    <div class="option-title">หมายเหตุเพิ่มเติม</div>
+                    <textarea id="m_note" class="input-note" rows="2" placeholder="เช่น ไม่ใส่ผัก, หวานน้อย, ขอซอสเยอะๆ ฯลฯ"></textarea>
+                </div>`;
+
+            document.getElementById('btnConfirmAdd').onclick = submitToCart;
+            document.getElementById('optionModal').classList.add('active');
+        }
+
+        function closeOptionModal() { document.getElementById('optionModal').classList.remove('active'); }
+
+        function submitToCart() {
+            let finalPrice = currentItem.price;
+            let details = [];
+
+            const sukiTypeOpt = document.querySelector('input[name="f_suki_type"]:checked');
+            if (sukiTypeOpt) { details.push(sukiTypeOpt.value); }
+
+            const meatOpt = document.querySelector('input[name="f_meat"]:checked');
+            if (meatOpt) { details.push(meatOpt.value); }
+
+            if (currentItem.type !== 'drink') {
+                const sizeOpt = document.querySelector('input[name="f_size"]:checked');
+                if (sizeOpt && sizeOpt.dataset.p !== "0") { finalPrice += parseInt(sizeOpt.dataset.p); details.push(sizeOpt.value); }
+                
+                document.querySelectorAll('input[name="f_egg"]:checked').forEach(egg => { finalPrice += parseInt(egg.dataset.p); details.push(egg.value); });
+                
+                const spicyOpt = document.querySelector('input[name="f_spicy"]:checked');
+                if (spicyOpt) details.push(`ความเผ็ด:${spicyOpt.value}`);
+            } else {
+                if (!document.getElementById('d_ice').checked) details.push('ไม่ใส่น้ำแข็ง');
+            }
+
+            const note = document.getElementById('m_note').value.trim();
+            if (note) details.push(`โน้ต: ${note}`);
+
+            const fullItemName = details.length > 0 ? `${currentItem.name} (${details.join(', ')})` : currentItem.name;
+            const existing = cart.find(item => item.name === fullItemName);
+            if (existing) { existing.quantity += 1; } else { cart.push({ cartId: Date.now() + Math.random().toString(36).substr(2, 5), name: fullItemName, price: finalPrice, quantity: 1 }); }
+            
+            updateCartBadge();
+            closeOptionModal();
+            alert('เพิ่มลงตะกร้าเรียบร้อยแล้ว');
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cart-badge');
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            if (count > 0) { badge.textContent = count; badge.style.display = 'block'; } else { badge.style.display = 'none'; }
+        }
+
+        function renderCart() {
+            const list = document.getElementById('cart-list');
+            const summary = document.getElementById('cart-summary');
+            if (cart.length === 0) { list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-basket-shopping"></i><p>ไม่มีสินค้าในตะกร้าค่ะ</p></div>`; summary.style.display = 'none'; return; }
+
+            summary.style.display = 'block';
+            list.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <div class="cart-flex">
+                            <div style="flex-grow: 1;">
+                                <h4 style="font-weight: 600; font-size:0.95rem;">${item.name}</h4>
+                                <p style="color: var(--gold-dark); margin-top: 4px; font-weight:600;">฿${itemTotal}</p>
+                            </div>
+                            <div class="qty-controls">
+                                <button class="btn-qty" onclick="changeQty('${item.cartId}', -1)">-</button>
+                                <span style="font-weight:600;">${item.quantity}</span>
+                                <button class="btn-qty" onclick="changeQty('${item.cartId}', 1)">+</button>
+                                <button class="btn-delete" onclick="deleteItem('${item.cartId}')"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+            finalOrderTotal = total;
+            document.getElementById('total-price').textContent = `฿${total}`;
+        }
+
+        function changeQty(cartId, change) {
+            const item = cart.find(i => i.cartId === cartId);
+            if (item) { item.quantity += change; if (item.quantity <= 0) { deleteItem(cartId); return; } renderCart(); updateCartBadge(); }
+        }
+
+        function deleteItem(cartId) { cart = cart.filter(i => i.cartId !== cartId); renderCart(); updateCartBadge(); }
+        function openPaymentModal() { document.getElementById('pay-total-amount').textContent = `฿${finalOrderTotal}`; document.getElementById('paymentModal').classList.add('active'); }
+        function closePaymentModal() { document.getElementById('paymentModal').classList.remove('active'); }
+
+        function confirmPayment() {
+            const generatedOrderNo = `#${Date.now().toString().slice(-5)}`;
+            const paymentText = selectedPaymentMethod === 'qr' ? 'โอนเงิน (QR)' : 'เงินสด';
+
+            const latestOrder = {
+                orderNumber: generatedOrderNo,
+                orderTime: new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }),
+                orderDate: new Date().toLocaleDateString('th-TH'), 
+                items: [...cart],
+                totalPrice: finalOrderTotal,
+                status: 'รอตรวจสอบ',
+                table: selectedTableNo,
+                orderType: selectedOrderType,
+                paymentMethod: paymentText
+            };
+
+            if (typeof window.sendOrderToFirebase === "function") { 
+                window.sendOrderToFirebase(latestOrder); 
+            }
+
+            const orderList = document.getElementById('order-list');
+            let itemsHtml = latestOrder.items.map(item => `<p style="font-size:0.9rem; color:var(--text-main);">• ${item.name} x ${item.quantity}</p>`).join('');
+            
+            orderList.innerHTML = `
+                <div class="cart-item" style="border-left: 4px solid var(--gold-primary);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <span class="order-no-tag"><i class="fa-solid fa-hashtag"></i> ${generatedOrderNo}</span>
+                        <span style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">
+                            <i class="fa-regular fa-clock"></i> ${latestOrder.orderTime} น. 
+                            (${latestOrder.orderType === 'ทานที่ร้าน' ? 'โต๊ะ ' + selectedTableNo : 'กลับบ้าน'})
+                        </span>
+                    </div>
+
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px;">
+                        <span style="font-size: 0.8rem; color: var(--gold-dark); font-weight: 600;">
+                            <i class="fa-solid fa-wallet"></i> การชำระเงิน: ${latestOrder.paymentMethod}
+                        </span>
+                        <span style="font-size:0.85rem; font-weight:600;" id="cust-order-status-text">
+                            ⏳ ${latestOrder.status}
+                        </span>
+                    </div>
+
+                    <div class="status-steps">
+                        <div class="step-item active" id="step-1">
+                            <div class="step-dot"><i class="fa-solid fa-receipt"></i></div>
+                            <div class="step-text">รับออเดอร์</div>
+                        </div>
+                        <div class="step-item" id="step-2">
+                            <div class="step-dot"><i class="fa-solid fa-fire-burner"></i></div>
+                            <div class="step-text">กำลังปรุง</div>
+                        </div>
+                        <div class="step-item" id="step-3">
+                            <div class="step-dot"><i class="fa-solid fa-bell"></i></div>
+                            <div class="step-text">พร้อมเสิร์ฟ</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:12px; border-top:1px dashed #eee; padding-top:8px;">${itemsHtml}</div>
+                    <div style="display:flex; justify-content:space-between; border-top:1px solid var(--border-color); padding-top:10px;">
+                        <span style="font-weight:600;">ยอดรวมทั้งหมด:</span><span style="color:var(--gold-dark); font-weight:600;">฿${latestOrder.totalPrice}</span>
+                    </div>
+                </div>`;
+
+            cart = []; 
+            updateCartBadge(); 
+            closePaymentModal(); 
+            switchPage('order-page', document.querySelectorAll('.nav-item')[2]);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tableNo = urlParams.get('table');
+            if (tableNo) {
+                selectedTableNo = tableNo;
+                const dropdown = document.getElementById('customer-table-select');
+                if (dropdown) dropdown.value = tableNo;
+                handleTableSelectChange(tableNo);
+            }
+        });
+    </script>
+</body>
+</html>
